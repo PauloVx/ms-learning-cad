@@ -28,6 +28,7 @@ public class StudentService {
         Student student = new Student();
         student.setStudentId(UUID.randomUUID());
         student.setCreatedOn(LocalDateTime.now());
+        student.setStatus(true);
 
         BeanUtils.copyProperties(studentInput,student);
 

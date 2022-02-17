@@ -31,5 +31,7 @@ public class Student {
 
     private UUID courseId;
 
+    private Boolean status;
+
     private LocalDateTime createdOn;
 }
