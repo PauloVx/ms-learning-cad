@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface StudentRepository extends MongoRepository<Student, UUID> {
+    Student getStudentByStudentId(UUID studentId);
 }
