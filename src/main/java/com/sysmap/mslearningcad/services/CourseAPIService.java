@@ -23,15 +23,26 @@ public class CourseAPIService {
 
     public Boolean isCourseIdValid(UUID courseId) {
 
-        var courseApiResponse = this.courseApi
-            .get()
-            .uri(COURSES_URI + "/" + courseId)
-            .retrieve()
-            .bodyToMono(GetCourseResponse[].class)
-            .block();
+        GetCourseResponse[] courseApiResponse = getGetCoursesFromAPI(courseId);
 
         assert courseApiResponse != null;
 
         return courseApiResponse.length == 1;
+    }
+
+    public String getCourseNameById(UUID courseId) {
+        GetCourseResponse courseApiResponse = getGetCoursesFromAPI(courseId)[0];
+
+        return courseApiResponse.getCourseName();
+    }
+
+    private GetCourseResponse[] getGetCoursesFromAPI(UUID courseId) {
+        var courseApiResponse = this.courseApi
+                .get()
+                .uri(COURSES_URI + "/" + courseId)
+                .retrieve()
+                .bodyToMono(GetCourseResponse[].class)
+                .block();
+        return courseApiResponse;
     }
 }
